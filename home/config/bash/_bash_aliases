@@ -1,0 +1,156 @@
+################################################
+# bash_aliases
+################################################
+
+alias ls='ls --color'
+#alias ls='ls --color'
+alias la='ls -a'
+alias ll='ls -l'
+alias lla='ls -la'
+#alias l='ls'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Some common shortcuts for tools
+alias j='jobs'
+alias v='vim'
+alias vi='vim'
+alias gvim='gvim -X -geom 120x55'
+alias g='gvim'
+alias ric='ri -f ansi'
+alias ping='ping -c 5'
+alias epython='.venv/bin/python'
+alias ctl='sudo systemctl'
+alias pa='php artisan'
+
+# Aliases for git
+alias git='git --no-pager'
+alias gs='git status'
+alias gb='git branch -a --color'
+alias gd='git diff --color'
+alias gc='git commit'
+alias ga='git add'
+alias gl='git log --reverse'
+alias gr='git rebase'
+alias gps='git push'
+alias gpl='git pull'
+alias gco='git checkout'
+alias grm='git rm'
+alias gmv='git mv'
+alias grp='git remote prune origin'
+
+# Aliases for common chmods
+alias 000='chmod 000'
+alias 644='chmod 644'
+alias 755='chmod 755'
+alias x='chmod +x'
+
+# Aliases for software managment
+alias pacman='sudo pacman --noconfirm'
+alias install='sudo pacman -S'
+alias uninstall='sudo pacman -Rs'
+alias update-top='topgrade -y --no-retry'
+alias update='sudo pacman -Syu'
+#alias update='sudo apt update && sudo apt upgrade -y'
+alias update-aur='yay -Quq --aur | xargs -n 1 yay -S --noconfirm'
+alias yay='yay --noconfirm'
+#alias update='sudo apt update && sudo apt upgrade'
+#alias install='sudo apt -y install'
+
+# Execute the last command as root
+alias lr='sudo $(history | tail -n 2 | head -n 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g")'
+
+# Search for a process containing a given name
+function pps() {
+ps aux | grep "$@" | grep -v 'grep';
+}
+
+# SSH Connections
+alias x11='ssh root@x11.servers.0x378.com'
+alias x12a='ssh root@x12a.servers.0x378.com'
+alias x12b='ssh root@x12b.servers.0x378.com'
+alias x13a='ssh root@x13a.servers.0x378.com'
+alias x13b='ssh root@x13b.servers.0x378.com'
+alias tpl-small='ssh synergy@tpl-small.servers.0x378.com -p 4255'
+alias tpl-medium='ssh synergy@tpl-medium.servers.0x378.com -p 4255'
+alias tpl-large='ssh synergy@tpl-large.servers.0x378.com -p 4255'
+alias ds-p1='ssh synergy@ds-p1.servers.0x378.com -p 4255'
+alias ds-s1='ssh synergy@ds-s1.servers.0x378.com -p 4255'
+alias static-p1='ssh synergy@static-p1.servers.0x378.com -p 4255'
+alias static-s1='ssh synergy@static-s1.servers.0x378.com -p 4255'
+alias red88-p1='ssh red88@red88-p1.servers.0x378.com -p 4255'
+alias red88-s1='ssh red88@red88-s1.servers.0x378.com -p 4255'
+alias red88-p1-synergy='ssh synergy@red88-p1.servers.0x378.com -p 4255'
+alias red88-s1-synergy='ssh synergy@red88-s1.servers.0x378.com -p 4255'
+alias apps-p1='ssh synergy@apps-p1.servers.0x378.com -p 4255'
+alias apps-s1='ssh synergy@apps-s1.servers.0x378.com -p 4255'
+alias linode-11='ssh synergy@linode-11.servers.0x378.com -p 4255'
+alias cx378-p1='ssh synergy@cx378-p1.servers.0x378.com -p 4255'
+
+alias ops-p1='ssh synergy@ops-p1.servers.0x378.com'
+alias gf-s1='ssh synergy@gf-s1.servers.0x378.com'
+alias agent-s1='ssh synergy@agent-s1.servers.0x378.com'
+
+alias ds-staging='ssh synergy@staging.dotsynergy.com'
+alias ds-prod='ssh synergy@prod.dotsynergy.com'
+
+alias vmin='ssh root@vmin.hosting.thoughtlogix.net'
+alias da='ssh root@da.hosting.thoughtlogix.net'
+
+alias cxMac='ssh jeff@192.168.10.35'
+alias cxCoreyann9='ssh jeff@192.168.10.20 -Y'
+alias cxCa9='ssh jeff@192.168.10.20 -Y'
+alias cxCoreyann8='ssh jeff@192.168.10.10 -Y'
+alias cxCa7='ssh jeff@192.168.10.15 -Y'
+alias cxCoreyann8='ssh jeff@192.168.10.10 -Y'
+alias cxGo='ssh jeff@192.168.10.46 -Y'
+alias cxYoga='ssh jeff@192.168.10.45 -Y'
+alias cxVivo='ssh jeff@192.168.10.18 -Y'
+alias ss1='ssh jeff@192.168.10.1 -Y'
+alias ss2='ssh jeff@192.168.10.2 -Y'
+alias cxThinkpad='ssh jeff@192.168.10.10 -Y'
+
+alias grilledcheese='ssh pi@192.168.10.56 -Y' #pi3
+alias grilledcheese-wifi='ssh pi@192.168.10.196 -Y' #pi3
+alias nachos='ssh pi@192.168.10.55 -Y' #pi2
+alias nachos-wifi='ssh pi@192.168.10.195 -Y' #pi2
+alias bacon='ssh pi@192.168.10.52 -Y' #pi4
+alias taco='ssh pi@192.168.10.50 -Y' #pi4
+alias pizza='ssh pi@192.168.10.51 -Y' # pi4
+
+# alias gf-staging='ssh ubuntu@staging.cntrack.com'
+alias gf-staging='ssh synergy@staging.cntrack.com -p 4255'
+alias gf-demo='ssh ubuntu@demo.cntrack.com'
+alias gf-bwc='ssh ubuntu@bwc.cntrack.com'
+alias gf-gosh='ssh ubuntu@gosh.cntrack.com'
+
+# Aliases for common paths
+alias cd-d='cd ~/data'
+alias o-d='open ~/data'
+alias cddl='cd ~/data-local'
+alias cdiq='cd ~/data/dev/infoquantn'
+alias cdgf='cd ~/data/dev/infoquant/gf'
+alias cdgfbin='cd ~/data/dev/infoquant/gf/bin'
+alias cdtools='cd ~/data/dev/infoquant/tools'
+alias cdsyn='cd ~/data/dev/syntiva'
+alias cddot='cd ~/data/dev/syntiva/dot'
+alias cddotbin='cd ~/data/dev/syntiva/dot/bin'
+alias cdstatbin='cd ~/data/dev/syntiva/cloud-static-sites && senv && cd _bin'
+alias cddotassets='cd ~/data/dev/syntiva/dot/assets'
+alias cdelix='cd ~/data/dev/syntiva/elixir'
+alias cdred88='cd ~/data/dev/fedario/red88/'
+
+alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
+alias cowtalk='fortune | cowsay -f $(ls /usr/share/cows/ | shuf -n1)'
+alias freeze='rm requirements.txt;pip freeze > requirements.txt'
+alias ienv='rm -rf .venv; python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt'
+alias denv='deactivate; rm -rf .venv' 
+alias senv='source .venv/bin/activate'
+alias sshr='ssh-keygen -f /home/jeff/.ssh/known_hosts -R'
+alias sbash='. ~/.bashrc'
+
+alias dsb-arch='distrobox enter arch'
+alias fzfd='cd $(find * -type d | fzf)'
+alias fzfh='find /home/jeff -type f | fzf'
+alias fzfhd='cd $(find /home/jeff -type d | fzf)'

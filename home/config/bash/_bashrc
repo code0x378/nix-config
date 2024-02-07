@@ -1,0 +1,192 @@
+####################################################
+#                  _____   _____    ___
+#     ___  __  __ |___ /  |___  |  ( _ )
+#    / __| \ \/ /   |_ \     / /   / _ \
+#   | (__   >  <   ___) |   / /   | (_) |
+#    \___| /_/\_\ |____/   /_/     \___/
+#
+#	https://www.code0x378.com
+#
+####################################################
+
+# If not running interactively, don't do anything
+# [[ $- != *i* ]] && return
+
+# Get the os for later use...
+case "$OSTYPE" in
+  solaris*) platform="SOLARIS" ;;
+  darwin*)  platform="OSX" ;;
+  linux*)   platform="LINUX" ;;
+  bsd*)     platform="BSD" ;;
+  msys*)    platform="WINDOWS" ;;
+  *)        platform="unknown: $OSTYPE" ;;
+esac
+
+# Completions
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# Colors
+if [ -f ~/.dir_colors ]; then
+eval `dircolors ~/.dir_colors`
+fi
+
+# Aliases.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# Lang
+if [[ $LANG = '' ]]; then
+	export LANG=en_US.UTF-8
+fi
+
+# Common stuff
+export PAGER=less
+export EDITOR=nvim
+export LESS='-R'
+export HISTCONTROL=ignoredups
+export HISTSIZE=5000
+export HISTFILESIZE=1000
+export HISTIGNORE="pwd:exit:clear:history"
+
+# Dev stuff
+export BINTRAY_USER="xxx"
+export BINTRAY_KEY="xxx"
+export ANSIBLE_NOCOWS=1
+export ERL_AFLAGS="-kernel shell_history enabled"
+export BUN_INSTALL="$HOME/.bun"
+export PATH=$BUN_INSTALL/bin:$PATH
+
+if [ -d "$HOME/.cargo/env" ] ; then
+	. "$HOME/.cargo/env"
+fi
+
+# Vi mode
+set -o vi
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
+
+# Platform stuff
+if [[ $platform == 'LINUX' ]]; then
+    export BROWSER=/usr/bin/firefox
+    export PATH_TO_FX=/home/jeff/data-local/dev/javafx-sdk-11.0.2/lib/
+
+    # export QT_QPA_PLATFORMTHEME=qt5ct
+	# export QT_SELECT=qt5
+    # export GDK_SCALE=1.5
+    # export GDK_DPI_SCALE=0.5
+    # export QT_AUTO_SCREEN_SCALE_FACTOR=1
+    # export QT_SCREEN_SCALE_FACTORS=1.5
+    # export QT_SCALE_FACTOR=1
+
+    if [ -f /home/jeff/.asdf/asdf.sh ]; then
+        . /home/jeff/.asdf/asdf.sh
+    fi
+
+    if [ -f /home/jeff/.asdf/completions/asdf.bash ]; then
+        . /home/jeff/.asdf/completions/asdf.bash
+    fi
+
+	if [ -f /usr/share/bash-completion/bash_completion ]; then
+    	. /usr/share/bash-completion/bash_completion
+    fi
+
+	PROMPT_DIRTRIM=1
+    export JAVA_HOME=/home/jeff/.asdf/installs/java/adoptopenjdk-11.0.8+10/
+	export GOPATH=/home/jeff/data/dev/go/
+	export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+	export PATH=/home/jeff/.local/bin:$PATH
+	export PATH=/home/jeff/bin:$PATH
+	export PATH=/home/jeff/.cargo/bin:$PATH
+	export PATH=/home/jeff/.nix-profile/bin:$PATH
+    export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+	export FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{node_modules/*,.git/*,build/*,out/*,output/*,dist/*,gradle/*,.cache/*,.local/*,.config/*,design/*,data-local/*}"'
+
+    # kdesrc-build #################################################################
+
+    ## Add kdesrc-build to PATH
+    export PATH="$HOME/kde/src/kdesrc-build:$PATH"
+
+    ## Autocomplete for kdesrc-run
+    function _comp_kdesrc_run
+    {
+    local cur
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+
+    # Complete only the first argument
+    if [[ $COMP_CWORD != 1 ]]; then
+        return 0
+    fi
+
+    # Retrieve build modules through kdesrc-run
+    # If the exit status indicates failure, set the wordlist empty to avoid
+    # unrelated messages.
+    local modules
+    if ! modules=$(kdesrc-run --list-installed);
+    then
+        modules=""
+    fi
+
+    # Return completions that match the current word
+    COMPREPLY=( $(compgen -W "${modules}" -- "$cur") )
+
+    return 0
+    }
+
+    ## Register autocomplete function
+    complete -o nospace -F _comp_kdesrc_run kdesrc-run
+
+    ################################################################################
+
+elif [[ $platform == 'OSX' ]]; then
+
+   	export PATH=$PATH:$HOME/bin:/usr/local/bin:/Library/PostgreSQL/11/bin
+   	[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+   	export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+   	export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+
+	export GOPATH=/Users/jeff/go
+	export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+   . /usr/local/opt/asdf/libexec/asdf.sh
+
+fi
+
+### SHOPT
+# shopt -s autocd # change to named directory
+shopt -s cdspell # autocorrects cd misspellings
+shopt -s cmdhist # save multi-line commands in history as single line
+shopt -s dotglob
+shopt -s histappend # do not overwrite history
+shopt -s expand_aliases # expand aliases
+shopt -s checkwinsize # checks term size when bash regains control
+
+# ignore upper and lowercase when TAB completion
+bind "set completion-ignore-case on"
+
+# set options
+set -o noclobber # prevent overwriting files with cat
+set -o ignoreeof # stops ctrl+d from logging me out
+
+# Random stuff
+# stty -ixon # disable XON/XOFF flow control (^s/^q)
+complete -cf sudo # Tab complete for sudo
+# xhost +local:root > /dev/null 2>&1
+
+## Register autocomplete function
+complete -o nospace -F _comp-kdesrc-run kdesrc-run
+
+export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+export BASH_SILENCE_DEPRECATION_WARNING=1
+export PATH="$HOME/.poetry/bin:$PATH"
+
+# Print some nice fortune text
+# fortune | cowsay
+# fortune | cowsay -f $(ls /usr/share/cows/ | shuf -n1)
+# say-something.sh | cowsay -f $(ls /usr/share/cows/ | shuf -n1)
+
