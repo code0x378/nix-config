@@ -46,7 +46,7 @@
       nettools # For network diagnostics
       nix-index # Locate nix packages
       nix-tree # Check dependencies
-      nixfmt # Format Nix files
+      nixfmt-classic # Format Nix files
       nixpkgs-fmt # Format Nix files
       nixos-generators # Generate NixOS outputs from configurations
       nmap # For network debugging

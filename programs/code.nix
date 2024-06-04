@@ -23,7 +23,8 @@
         cmake # For compiling C++ programs
         comma # Wrapper for nix-shell and nix-index
         ctags # For generating tags 
-        dbeaver # For databases
+        dbeaver-bin # For databases
+        black # For formatting Python code
         docker # For running containers
         docker-compose # For running containers but better
         dotnet-sdk_8 # For running C# programs
@@ -43,6 +44,8 @@
         jdk17 # For running Java programs
         jq # For parsing JSON
         jpegoptim # For optimizing images
+        just # Make alternative
+#         kdePackages.kdevelop # IDE for C++
         libsecret # For passwords
         mono # For running C# programs
         neovim # The second-best editor. For when Emacs doesn't work
@@ -54,11 +57,16 @@
         ollama # For running Ollama programs
         onefetch # For showing off your git repos (like neoFetch but for git)
         pandoc # For converting documents
+        pkg-config # For compiling and linking (not sure how useful on nixos)
         pngquant # For optimizing images
         powerline-fonts # For the cool terminal fonts
         powershell # For running PowerShell programs
         python311Full # For running Python programs
-        ruby # For running Ruby programs
+        python311Packages.pip # For managing Python packages
+        python311Packages.virtualenv # For managing Python environments
+        python311Packages.virtualenvwrapper # For managing Python environments
+        ruby # For running Ruby programs'
+        rustup # Rustup can't be installed via web rustup.sh
         scenic-view # For viewing javafx scenes
         scenebuilder # For building javafx guis
         speedtest-cli # Testing my internet speed from the terminal
@@ -74,6 +82,48 @@
         vscode # For when you need a real IDE (or when you're too lazy to open a terminal and run neovim)
         wget # For downloading web pages and stuff
         zsh # The better shell
+
+        # Rust related
+        cargo-audit
+        cargo-binstall
+        cargo-cross
+        cargo-edit
+        cargo-leptos
+        cargo-outdated
+        cargo-tauri
+        cargo-update
+        cargo-watch
+        leptosfmt
+        trunk
+
+        # Language Servers
+       ansible-language-server
+       arduino-language-server
+       asm-lsp
+       cmake-language-server
+       crystalline
+       csharp-ls
+       dockerfile-language-server-nodejs
+       elmPackages.elm-language-server
+       emmet-language-server
+       glas
+       golangci-lint-langserver
+       gopls
+       htmx-lsp
+       jdt-language-server
+       kotlin-language-server
+       luajitPackages.lua-lsp
+       marksman
+       nimlsp
+       nodePackages.bash-language-server
+       nodePackages.svelte-language-server
+       nodePackages.typescript-language-server
+       pylyzer
+       tailwindcss-language-server
+       terraform-lsp
+       vala-language-server
+       vim-language-server
+       yaml-language-server
       ];
     };
 

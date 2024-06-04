@@ -3,10 +3,6 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      # calibre
-      # apcupsd
-      # duplicacy
-      # samba4Full
       bitwarden-cli # CLI for bitwarden
       blender # 3D creation suite
       brave # Brave Browser
@@ -25,15 +21,16 @@
       kdiskmark # Disk benchmarking tool
       krita # Painting tool 
       libreoffice # LibreOffice
-      libsForQt5.bismuth # Window tile manager
-      libsForQt5.kdenlive # Video editor
-      libsForQt5.kdevelop # IDE for C++
-      libsForQt5.yakuake # Yakuake terminal
+#       libsForQt5.bismuth # Window tile manager
+      kdePackages.kdenlive # Video editor
+      kdePackages.yakuake # Yakuake terminal
+      kdePackages.sddm-kcm # Configure sddm without nix
       obs-studio # Open Broadcaster Software for streaming
-      # obsidian
+      obsidian
       qbittorrent-qt5 # Torrent client
       qdirstat # Disk usage analyzer
       qemu # QEMU for virtualization
+      plymouth # Pretty startup screen
       remmina # Remote Desktop Client
       screenkey # Display key presses on screen
       simplescreenrecorder # Screen recorder
@@ -45,11 +42,11 @@
       teamviewer # Remote desktop software
       termius # SSH client
       thunderbird # Thunderbird email client
-      virt-manager-qt # Virtual Machine Manager
+#       virt-manager-qt # Virtual Machine Manager
       virtualbox # VirtualBox for virtualization
       vivaldi # Vivaldi Browser
       vlc # VLC Media Player
-      vmware-workstation # VMware Workstation for virtualization
+#       vmware-workstation # VMware Workstation for virtualization
       wayland # Wayland display server
       xrdp # Remote desktop protocol
       xsel # Clipboard manager
