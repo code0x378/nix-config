@@ -6,7 +6,7 @@
 }: {
   imports = [
     ../common.nix
-    ../../home/default.nix
+#     ../../home/default.nix
     ../../programs/core.nix
     ../../programs/desktop.nix
     ../../programs/gaming.nix
@@ -18,7 +18,6 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices."luks-343cf4bc-99ab-4ad2-8450-e7a4860d255e".device = "/dev/disk/by-uuid/343cf4bc-99ab-4ad2-8450-e7a4860d255e";
 
   networking =
     {

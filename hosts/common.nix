@@ -1,9 +1,4 @@
-{ inputs
-, lib
-, config
-, pkgs
-, ...
-}: {
+{ inputs, lib, config, pkgs, ...}: {
 
   nixpkgs = {
     overlays = [ ];
@@ -11,21 +6,6 @@
       allowUnfree = true;
     };
   };
-
-  # This will add each flake input as a registry
-  # To make nix3 commands consistent with your flake
-  nix.registry = (lib.mapAttrs (_: flake: { inherit flake; })) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
-
-  # This will additionally add your inputs to the system's legacy channels
-  # Making legacy nix commands consistent as well, awesome!
-  nix.nixPath = [ "/etc/nix/path" ];
-  environment.etc =
-    lib.mapAttrs'
-      (name: value: {
-        name = "nix/path/${name}";
-        value.source = value.flake;
-      })
-      config.nix.registry;
 
   nix.settings = {
     experimental-features = "nix-command flakes";
@@ -90,20 +70,20 @@
 
   # Enable Bluetooth
   hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  services.blueman.enable = false;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
+  services.xserver.xkb = {
+      layout = "us";
+      variant = "";
+    };
 
   # Enable CUPS to print documents.
   services.printing = {
@@ -122,7 +102,8 @@
   system.autoUpgrade.allowReboot = false;
 
   # Virtualization
-  virtualisation.vmware.guest.enable = true;
+  # virtualisation.vmware.guest.enable = true;
+#   virtualisation.vmware.host.enable = true;
 
   programs = {
     direnv.enable = true;
@@ -193,6 +174,15 @@
   users.users.jsmith = {
     isNormalUser = true;
     description = "Jeffrey P Smith";
+    extraGroups = [ "docker" "networkmanager" "wheel" "scanner" "lp" "uucp" "libvirtd" "wireshark" ];
+    initialPassword = "password";
+    packages = with pkgs; [
+      #  thunderbird
+    ];
+  };
+  users.users.paulva = {
+    isNormalUser = true;
+    description = "Paulva Ng";
     extraGroups = [ "docker" "networkmanager" "wheel" "scanner" "lp" "uucp" "libvirtd" "wireshark" ];
     initialPassword = "password";
     packages = with pkgs; [
