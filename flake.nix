@@ -3,10 +3,10 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 
     # Home manager
-    # home-manager.url = "github:nix-community/home-manager/release-23.11";
+    # home-manager.url = "github:nix-community/home-manager/release-24.05";
     # home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # NixOS ISO Generators
@@ -29,29 +29,29 @@
     {
 
       # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#your-hostname'
+      # Available through 'nixos-rebuild switch --flake .#your-hostname' or . if your hostname matches
       nixosConfigurations = {
 
-        nixos-ca9 = nixpkgs.lib.nixosSystem {
+        cxCoreyann9 = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            ./hosts/nixos-ca9/configuration.nix
+            ./hosts/cxCoreyann9/configuration.nix
           ];
         };
 
-        nixos-thinkpad = nixpkgs.lib.nixosSystem {
+        cxThinkpad = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
             # home-manager.nixosModules.home-manager
             # { home-manager.users.jeff = import ./home/default.nix; }
-            ./hosts/nixos-thinkpad/configuration.nix
+            ./hosts/cxThinkpad/configuration.nix
           ];
         };
 
-        nixos-yoga = nixpkgs.lib.nixosSystem {
+        cxYoga = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            ./hosts/nixos-yoga/configuration.nix
+            ./hosts/cxYoga/configuration.nix
           ];
         };
 
