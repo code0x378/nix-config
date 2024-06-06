@@ -3,6 +3,7 @@
 {
   environment = {
     systemPackages = with pkgs; [
+      alpine # Classic cli emails
       aspell # Spell checking
       aspellDicts.en # English dictionary
       bash # Gotta have bash
@@ -23,7 +24,7 @@
       eza # ls but better
       fd # Find but better
       feh # Image viewer
-      ffmpeg # I deal with a lot of videos
+      ffmpeg # King of video tools
       file # No more asking yourself what file it is, now you can just open a terminal, navigate to the directory, and run a command instead of looking at the file extension
       fortune # For fun
       gotop # Like btop but better
@@ -32,8 +33,9 @@
       ifuse # For connecting my phone
       imagemagick # Really useful for scripts
       inotify-tools # For watching files
+      killall # Kill everything
       ipfs # IPFS
-      libimobiledevice # For connecting my phone
+      libimobiledevice # For connecting a phone
       libsecret # For passwords
       lm_sensors # For monitoring system sensors
       lynis # Security audits
@@ -42,7 +44,7 @@
       mlocate # Locate files
       neofetch # Everyone loves neofetch
       openssl # For SSL Certificates
-      mono # For some programs 
+      mono # For some programs
       nettools # For network diagnostics
       nix-index # Locate nix packages
       nix-tree # Check dependencies
@@ -61,7 +63,7 @@
       speedtest-cli # Testing my internet speed from the terminal
       smartmontools # Monitor the health of hard drives
       sqlite # Databases and stuff
-      tldr # Console cheatsheets 
+      tldr # Console cheatsheets
       tmux # A terminal multiplexer
       tree # For viewing directory trees
       topgrade # Update everything

@@ -12,19 +12,17 @@
       host all all ::1/128   md5
     '';
     initialScript = pkgs.writeText "backend-initScript" ''
-       alter user postgres with password 'Smurffdb010';
+      alter user postgres with password 'Smurffdb010';
     '';
-    ensureDatabases = ["synergy"];
-    ensureUsers = [
-    {
-      name ="synergy";
+    ensureDatabases = [ "synergy" ];
+    ensureUsers = [{
+      name = "synergy";
       ensureDBOwnership = true;
       ensureClauses = {
-                  superuser = true;
-                  createrole = true;
-                  createdb = true;
-                };
-    }
-    ];
+        superuser = true;
+        createrole = true;
+        createdb = true;
+      };
+    }];
   };
 }

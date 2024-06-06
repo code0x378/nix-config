@@ -1,9 +1,4 @@
-{ inputs
-, lib
-, config
-, pkgs
-, ...
-}: {
+{ inputs, lib, config, pkgs, ... }: {
   nixpkgs = {
     overlays = [ ];
     config = {
@@ -34,7 +29,6 @@
     (import ./config/bash { inherit config; })
     (import ./config/git { inherit config pkgs; })
   ];
-
 
   home.stateVersion = "23.11";
 }

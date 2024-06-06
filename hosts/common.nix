@@ -1,10 +1,8 @@
-{ inputs, lib, config, pkgs, ...}: {
+{ inputs, lib, config, pkgs, ... }: {
 
   nixpkgs = {
     overlays = [ ];
-    config = {
-      allowUnfree = true;
-    };
+    config = { allowUnfree = true; };
   };
 
   nix.settings = {
@@ -28,17 +26,11 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [
-        22
-        4255
-        24800
-      ];
-      allowedTCPPortRanges = [
-        {
-          from = 1714; # KDE Connect
-          to = 1764;
-        }
-      ];
+      allowedTCPPorts = [ 22 4255 24800 ];
+      allowedTCPPortRanges = [{
+        from = 1714; # KDE Connect
+        to = 1764;
+      }];
       allowedUDPPorts = config.networking.firewall.allowedTCPPorts;
       allowedUDPPortRanges = config.networking.firewall.allowedTCPPortRanges;
     };
@@ -75,15 +67,18 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  # Cron
+  services.cron.enable = true;
+
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
-      layout = "us";
-      variant = "";
-    };
+    layout = "us";
+    variant = "";
+  };
 
   # Enable CUPS to print documents.
   services.printing = {
@@ -103,7 +98,7 @@
 
   # Virtualization
   # virtualisation.vmware.guest.enable = true;
-#   virtualisation.vmware.host.enable = true;
+  # virtualisation.vmware.host.enable = true;
 
   programs = {
     direnv.enable = true;
@@ -119,9 +114,7 @@
         enable = true;
         dates = "weekly";
       };
-      daemon.settings = {
-        bip = "169.254.0.1/16";
-      };
+      daemon.settings = { bip = "169.254.0.1/16"; };
     };
     libvirtd = {
       enable = true;
@@ -131,14 +124,14 @@
     };
   };
 
-  # Security
-  # security.rtkit.enable = true;
-
   # Sysctl
   boot.kernel.sysctl = {
-    "kernel.pid_max" = 4194304; # allows a large number of processes and threads to be managed
-    "fs.aio-max-nr" = 1048576; # defines the maximum number of asynchronous I/O requests that can be in progress at a given time.
-    "fs.inotify.max_user_watches" = 524288; # sets the maximum number of file system watches, enhancing file system monitoring capabilities.
+    "kernel.pid_max" =
+      4194304; # allows a large number of processes and threads to be managed
+    "fs.aio-max-nr" =
+      1048576; # defines the maximum number of asynchronous I/O requests that can be in progress at a given time.
+    "fs.inotify.max_user_watches" =
+      524288; # sets the maximum number of file system watches, enhancing file system monitoring capabilities.
   };
 
   # Enable sound with pipewire.
@@ -152,7 +145,6 @@
     pulse.enable = true;
   };
 
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -165,29 +157,59 @@
   users.users.jeff = {
     isNormalUser = true;
     description = "Jeff Smith";
-    extraGroups = [ "docker" "networkmanager" "wheel" "scanner" "lp" "uucp" "libvirtd" "wireshark" ];
-    initialPassword = "password";
-    packages = with pkgs; [
-      #  thunderbird
+    extraGroups = [
+      "docker"
+      "networkmanager"
+      "wheel"
+      "scanner"
+      "lp"
+      "uucp"
+      "libvirtd"
+      "wireshark"
     ];
+    initialPassword = "password";
+    packages = with pkgs;
+      [
+        #  thunderbird
+      ];
   };
   users.users.jsmith = {
     isNormalUser = true;
     description = "Jeffrey P Smith";
-    extraGroups = [ "docker" "networkmanager" "wheel" "scanner" "lp" "uucp" "libvirtd" "wireshark" ];
-    initialPassword = "password";
-    packages = with pkgs; [
-      #  thunderbird
+    extraGroups = [
+      "docker"
+      "networkmanager"
+      "wheel"
+      "scanner"
+      "lp"
+      "uucp"
+      "libvirtd"
+      "wireshark"
     ];
+    initialPassword = "password";
+    packages = with pkgs;
+      [
+        #  thunderbird
+      ];
   };
   users.users.paulva = {
     isNormalUser = true;
     description = "Paulva Ng";
-    extraGroups = [ "docker" "networkmanager" "wheel" "scanner" "lp" "uucp" "libvirtd" "wireshark" ];
-    initialPassword = "password";
-    packages = with pkgs; [
-      #  thunderbird
+    extraGroups = [
+      "docker"
+      "networkmanager"
+      "wheel"
+      "scanner"
+      "lp"
+      "uucp"
+      "libvirtd"
+      "wireshark"
     ];
+    initialPassword = "password";
+    packages = with pkgs;
+      [
+        #  thunderbird
+      ];
   };
   users.extraGroups.vboxusers.members = [ "jeff" "jsmith" ];
 

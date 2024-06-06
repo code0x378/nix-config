@@ -1,9 +1,4 @@
-{ inputs
-, lib
-, config
-, pkgs
-, ...
-}: {
+{ inputs, lib, config, pkgs, ... }: {
   imports = [
     ../common.nix
     # ../../home/default.nix
@@ -18,36 +13,30 @@
   ];
 
   # Bootloader.
-#   boot.loader.grub.enable = true;
-#   boot.loader.grub.device = "/dev/sda";
-#   boot.loader.grub.useOSProber = true;
+  #   boot.loader.grub.enable = true;
+  #   boot.loader.grub.device = "/dev/sda";
+  #   boot.loader.grub.useOSProber = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   # boot.initrd.kernelModules = [ "amdgpu" ];
 
   environment = {
-    systemPackages = with pkgs; [
-      calibre
-      apcupsd
-      duplicacy
-      samba4Full
-    ];
+    systemPackages = with pkgs; [ calibre apcupsd duplicacy samba4Full ];
   };
 
-  networking =
-    {
-      hostName = "cxCoreyann9";
-      # interfaces = {
-      #   ens33.ipv4.addresses = [{
-      #     address = "192.168.10.20";
-      #     prefixLength = 32;
-      #   }];
-      # };
-      # defaultGateway = {
-      #   address = "192.168.10.254";
-      #   interface = "ens33";
-      # };
-    };
+  networking = {
+    hostName = "cxCoreyann9";
+    # interfaces = {
+    #   ens33.ipv4.addresses = [{
+    #     address = "192.168.10.20";
+    #     prefixLength = 32;
+    #   }];
+    # };
+    # defaultGateway = {
+    #   address = "192.168.10.254";
+    #   interface = "ens33";
+    # };
+  };
 
   # Power Management
   powerManagement.cpuFreqGovernor = "performance";

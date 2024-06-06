@@ -5,16 +5,14 @@
 
   outputs = { nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-      {
+      let pkgs = nixpkgs.legacyPackages.${system};
+      in {
         devShells.default = pkgs.mkShell {
           packages = [
-          pkgs.python311
-          pkgs.python311Packages.pip
-          pkgs.python311Packages.virtualenv
-    ];
+            pkgs.python311
+            pkgs.python311Packages.pip
+            pkgs.python311Packages.virtualenv
+          ];
         };
       });
 }

@@ -16,17 +16,9 @@
     nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs =
-    { self
-    , nixpkgs
-    , home-manager
-    , nix-colors
-    , ...
-    } @ inputs:
-    let
-      inherit (self) outputs;
-    in
-    {
+  outputs = { self, nixpkgs, home-manager, nix-colors, ... }@inputs:
+    let inherit (self) outputs;
+    in {
 
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild switch --flake .#your-hostname' or . if your hostname matches
@@ -34,9 +26,7 @@
 
         cxCoreyann9 = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./hosts/cxCoreyann9/configuration.nix
-          ];
+          modules = [ ./hosts/cxCoreyann9/configuration.nix ];
         };
 
         cxThinkpad = nixpkgs.lib.nixosSystem {
@@ -50,9 +40,7 @@
 
         cxYoga = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./hosts/cxYoga/configuration.nix
-          ];
+          modules = [ ./hosts/cxYoga/configuration.nix ];
         };
 
       };

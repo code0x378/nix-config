@@ -1,9 +1,4 @@
-{ inputs
-, lib
-, config
-, pkgs
-, ...
-}: {
+{ inputs, lib, config, pkgs, ... }: {
   imports = [
     ../common.nix
     # ../../home/default.nix
@@ -18,28 +13,27 @@
   ];
 
   # Bootloader.
-#  boot.loader.grub.enable = true;
-#  boot.loader.grub.device = "/dev/sda";
-#  boot.loader.grub.useOSProber = true;
+  #  boot.loader.grub.enable = true;
+  #  boot.loader.grub.device = "/dev/sda";
+  #  boot.loader.grub.useOSProber = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-#   boot.plymouth.enable = true;
-#   boot.plymouth.theme="breeze";
+  #   boot.plymouth.enable = true;
+  #   boot.plymouth.theme="breeze";
 
- networking =
-   {
-     hostName = "cxThinkpad";
-#       interfaces = {
-#         enp0s31f6.ipv4.addresses = [{
-#           address = "192.168.10.10";
-#           prefixLength = 32;
-#         }];
-#       };
-#       defaultGateway = {
-#         address = "192.168.10.254";
-#         interface = "enp0s31f6";
-#       };
-   };
+  networking = {
+    hostName = "cxThinkpad";
+    #       interfaces = {
+    #         enp0s31f6.ipv4.addresses = [{
+    #           address = "192.168.10.10";
+    #           prefixLength = 32;
+    #         }];
+    #       };
+    #       defaultGateway = {
+    #         address = "192.168.10.254";
+    #         interface = "enp0s31f6";
+    #       };
+  };
 
   # Power Management
   powerManagement.cpuFreqGovernor = "performance";
