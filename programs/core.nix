@@ -11,6 +11,7 @@
       bat # Cat but better
       brgenml1cupswrapper # Brother printer drivers
       btop # Like htop but so much better looking
+      cifs-utils # Mount samba shares
       cmatrix # For fun
       conky # System monitor
       cowsay # Moo
