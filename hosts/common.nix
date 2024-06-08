@@ -86,6 +86,10 @@
     drivers = [ pkgs.brgenml1cupswrapper ];
   };
 
+  # Enable nix index for faster searching
+  programs.command-not-found.enable = false;
+  programs.nix-index.enable = true;
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
@@ -133,6 +137,9 @@
     "fs.inotify.max_user_watches" =
       524288; # sets the maximum number of file system watches, enhancing file system monitoring capabilities.
   };
+
+  # Reduce swappiness (default 60)
+  boot.kernel.sysctl = { "vm.swappiness" = 10;};
 
   # Enable sound with pipewire.
   sound.enable = true;

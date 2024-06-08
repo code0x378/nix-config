@@ -23,16 +23,20 @@
 
   networking = {
     hostName = "cxThinkpad";
-    #       interfaces = {
-    #         enp0s31f6.ipv4.addresses = [{
-    #           address = "192.168.10.10";
-    #           prefixLength = 32;
-    #         }];
-    #       };
-    #       defaultGateway = {
-    #         address = "192.168.10.254";
-    #         interface = "enp0s31f6";
-    #       };
+#           interfaces = {
+#             enp0s31f6.ipv4.addresses = [{
+#               address = "192.168.10.10";
+#               prefixLength = 24;
+#             }];
+#             wlp0s20f3.ipv4.addresses = [{
+#               address = "192.168.10.11";
+#               prefixLength = 24;
+#             }];
+#           };
+#           defaultGateway = {
+#             address = "192.168.10.254";
+#             interface = "enp0s31f6";
+#           };
   };
 
   # Power Management

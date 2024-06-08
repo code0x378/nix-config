@@ -42,7 +42,10 @@
   boot.initrd.luks.devices."luks-8d5345f1-e0d3-43a2-ba27-b3c20c92d03d".device =
     "/dev/disk/by-uuid/8d5345f1-e0d3-43a2-ba27-b3c20c92d03d";
 
-  swapDevices = [ ];
+  swapDevices = [{
+    device = "/swapfile";
+    size = 16 * 1024; # 16GB
+  }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

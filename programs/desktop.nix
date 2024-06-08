@@ -26,6 +26,7 @@
       kdePackages.yakuake # Yakuake terminal
       kdePackages.sddm-kcm # Configure sddm without nix
       kdePackages.kcron # Cron config from kde
+      kdePackages.kdeplasma-addons # Plasmoids and krunner stuff
       obs-studio # Open Broadcaster Software for streaming
       obsidian
       qbittorrent-qt5 # Torrent client

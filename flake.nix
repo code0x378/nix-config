@@ -14,9 +14,13 @@
 
     # Nix Colors
     nix-colors.url = "github:misterio77/nix-colors";
+
+    # Nix Index Database - Speed up lookups
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-colors, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nix-colors, nix-index-database, ... }@inputs:
     let inherit (self) outputs;
     in {
 
@@ -26,7 +30,10 @@
 
         cxCoreyann9 = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/cxCoreyann9/configuration.nix ];
+          modules = [
+            ./hosts/cxCoreyann9/configuration.nix
+            nix-index-database.nixosModules.nix-index
+          ];
         };
 
         cxThinkpad = nixpkgs.lib.nixosSystem {
@@ -35,12 +42,16 @@
             # home-manager.nixosModules.home-manager
             # { home-manager.users.jeff = import ./home/default.nix; }
             ./hosts/cxThinkpad/configuration.nix
+            nix-index-database.nixosModules.nix-index
           ];
         };
 
         cxYoga = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/cxYoga/configuration.nix ];
+          modules = [
+            ./hosts/cxYoga/configuration.nix
+            nix-index-database.nixosModules.nix-index
+          ];
         };
 
       };
